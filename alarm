@@ -1,0 +1,41 @@
+#!/bin/bash
+
+#paremtro uno y dos
+declare -a p1=${1} 
+declare -a p2=${2}
+
+#horas y minutos actuales
+declare -i Ha=$(date +%H)
+declare -i Ma=$(date +%M)
+declare -i H=${p2:0:2}
+declare -i M=${p2:3:4}
+
+
+
+case $p1 in
+	"-s" )
+		sleep `echo $p2`s
+		;;
+	"-m" )
+		sleep `echo $p2`m
+		;;
+	"-h" )
+		sleep `echo $p2`h
+		;;
+	"-hm" )
+		if [[ M < 59 ]]; then
+			if [[ H >= Ha && H <= 23 ]]; then
+				let H=$H-$Ha
+			else
+				let H=$H-23+$Ha
+			fi
+
+			let M=$M-$Ma+1
+			let T=($M+$H)*60
+			sleep `echo $T`s
+
+		fi
+		;;
+esac
+
+music
