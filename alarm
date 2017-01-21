@@ -38,4 +38,4 @@ case $p1 in
 		;;
 esac
 
-music
+audacious ~/Music/
